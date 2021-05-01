@@ -38,10 +38,6 @@
     "testPathIgnorePatterns": [
       "/node_modules/"
     ],
-    "testFileExtensions": [
-      "es6",
-      "js"
-    ],
     "moduleFileExtensions": [
       "js",
       "json",

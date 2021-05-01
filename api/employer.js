@@ -13,6 +13,14 @@ if (process.env.IS_OFFLINE) {
   }
 }
 
+if (process.env.JEST_WORKER_ID) {
+  options = {
+    region: 'local-env',
+    endpoint: 'http://localhost:8000',
+    sslEnabled: false
+  }
+}
+
 AWS.config.setPromisesDependency(require('bluebird'));
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient(options);
