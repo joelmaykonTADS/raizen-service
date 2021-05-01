@@ -1,11 +1,21 @@
 'use strict';
 
 const uuid = require('uuid');
-const AWS = require('aws-sdk'); 
+const AWS = require('aws-sdk');
+
+
+let options = {}
+
+if (process.env.IS_OFFLINE) {
+  options = {
+    region: 'localhost',
+    endpoint: 'http://localhost:8000'
+  }
+}
 
 AWS.config.setPromisesDependency(require('bluebird'));
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const dynamoDb = new AWS.DynamoDB.DocumentClient(options);
 
 
 module.exports.submit = (event, context, callback) => {
@@ -66,28 +76,74 @@ const employerInfo = (fullname, email, experience) => {
 
 module.exports.list = (event, context, callback) => {
   var params = {
-      TableName: process.env.EMPLOYER_TABLE,
-      ProjectionExpression: "id, fullname, email"
+    TableName: process.env.EMPLOYER_TABLE,
+    ProjectionExpression: "id, fullname, email, experience"
   };
 
   console.log("Scanning employer table.");
   const onScan = (err, data) => {
 
-      if (err) {
-          console.log('Scan failed to load data. Error JSON:', JSON.stringify(err, null, 2));
-          callback(err);
-      } else {
-          console.log("Scan succeeded.");
-          return callback(null, {
-              statusCode: 200,
-              body: JSON.stringify({
-                  employers: data.Items
-              })
-          });
-      }
+    if (err) {
+      console.log('Scan failed to load data. Error JSON:', JSON.stringify(err, null, 2));
+      callback(err);
+    } else {
+      console.log("Scan succeeded.");
+      return callback(null, {
+        statusCode: 200,
+        body: JSON.stringify({
+          employers: data.Items
+        })
+      });
+    }
 
   };
 
   dynamoDb.scan(params, onScan);
 
+};
+
+module.exports.update = (event, context, callback) => {
+  const requestBody = JSON.parse(event.body);
+  const fullname = requestBody.fullname;
+  const email = requestBody.email;
+  const experience = requestBody.experience;
+  const id = requestBody.id;
+  
+  const params = {
+      TableName: process.env.EMPLOYER_TABLE,
+      Key: {
+          "id": id
+      },
+      UpdateExpression: "set #fullname = :fullname, #email = :email, #experience = :experience",
+      ExpressionAttributeNames: {
+          "#fullname": "fullname",
+          "#email"   : "email",
+          "#experience" : "experience"
+      },
+      ExpressionAttributeValues: {
+          ":fullname": fullname,
+          ":email": email,
+          ":experience": experience
+      },
+      ReturnValues: 'ALL_NEW'
+  };
+
+  dynamoDb.update(params).promise().then(res => {
+    callback(null, {
+      statusCode: 200,
+      body: JSON.stringify({
+        message: `Sucessfully update employer with email ${email}`,
+        employerId: res.id
+      })
+    });
+  })
+  .catch(err => {
+    console.log(err);
+    callback(null, {
+      statusCode: 500,
+      body: JSON.stringify({
+        message: `Unable to update employer with email ${email}`
+      })
+    })
+  });
 };
