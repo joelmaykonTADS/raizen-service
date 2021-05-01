@@ -40,7 +40,7 @@ resources:
         TableName: ${self:provider.environment.EMPLOYER_TABLE}
 
 functions:
-  candidateSubmission:
+  employerSubmission:
     handler: api/employer.submit
     memorySize: 128
     description: Submit employer information and starts interview process.
@@ -48,7 +48,7 @@ functions:
       - http: 
           path: employers
           method: post
-  listCandidates:
+  listEmployers:
     handler: api/employer.list
     memorySize: 128
     description: List all employers
