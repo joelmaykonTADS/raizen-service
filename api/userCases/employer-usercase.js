@@ -69,8 +69,8 @@ const list = (callback) => {
     serviceDB.dynamo.list(params, onScan);
 }
 
-const update = ({ fullname, office, age, id }, callback) => {
-
+const update = (employer, callback) => {
+    const { fullname, office, age, id } = employer;
     const params = {
         TableName: process.env.EMPLOYER_TABLE,
         Key: {
@@ -91,20 +91,21 @@ const update = ({ fullname, office, age, id }, callback) => {
     };
 
     const updatedEmployer = (err, data) => {
-        const info = data.Attributes;
         if (err) {
+            console.log(err)
             callback(null, {
                 statusCode: 500,
                 body: JSON.stringify({
-                    message: `Unable to update employer with office ${info.office}`
+                    erro: err,
+                    message: `Unable to update employer with office ${office}`
                 })
             })
         } else {
             return callback(null, {
                 statusCode: 200,
                 body: JSON.stringify({
-                    message: `Sucessfully update employer with office ${info.office}`,
-                    employerId: info.id
+                    message: `Sucessfully update employer with office ${office}`,
+                    employerId: id
                 })
             });
         }
@@ -125,11 +126,14 @@ const remove = (id, callback) => {
 
     const removeEmployer = (err, data) => {
         if (err) {
+            console.log(err)
             callback(null, {
                 statusCode: 500,
-                body: JSON.stringify({
-                    message: `Unable to remove employer with office`
-                })
+                body: JSON.stringify(
+                    {
+                        erro: err,
+                        message: `Unable to remove employer with office`
+                    })
             })
         } else {
             return callback(null, {
