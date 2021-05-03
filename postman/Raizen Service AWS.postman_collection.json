@@ -1,0 +1,258 @@
+{
+	"info": {
+		"_postman_id": "d7e6aa22-43ac-48f9-b3fc-465de9b611eb",
+		"name": "Raizen Service AWS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST employer",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Auth",
+						"value": "allow",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fullname\": \"Shekhar Gulati\",\n    \"email\": \"shekhargulati84@gmail.com\",\n    \"experience\": 12\n}"
+				},
+				"url": {
+					"raw": "https://7hbs0mxh12.execute-api.us-east-1.amazonaws.com/dev/employers",
+					"protocol": "https",
+					"host": [
+						"7hbs0mxh12",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"employers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET employers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://7hbs0mxh12.execute-api.us-east-1.amazonaws.com/dev/employers",
+					"protocol": "https",
+					"host": [
+						"7hbs0mxh12",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"employers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH employers",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"office\": \"developer\",\n    \"id\": \"8e030080-abaf-11eb-a762-49d637559a93\",\n    \"fullname\": \"Joel Maykon\",\n    \"age\": 13\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://7hbs0mxh12.execute-api.us-east-1.amazonaws.com/dev/employers",
+					"protocol": "https",
+					"host": [
+						"7hbs0mxh12",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"employers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE employers",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fullname\": \"Joel Maykon\",\n    \"id\": \"36fce6a0-aaad-11eb-80bb-7fcf8b4a2263\",\n    \"experience\": 13,\n    \"email\": \"shekhargulati84@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/dev/employers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"dev",
+						"employers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST employer local",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Auth",
+						"type": "text",
+						"value": "allow",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fullname\": \"Joel Gulati\",\n    \"email\": \"shekhargulati84@gmail.com\",\n    \"experience\": 13,\n    \"id\": \"7c765e00-aa80-11eb-bf66-11a5399a6816\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/dev/employers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"dev",
+						"employers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET employers local",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/dev/employers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"dev",
+						"employers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH employers local",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fullname\": \"Joel Maykon\",\n    \"id\": \"36fce6a0-aaad-11eb-80bb-7fcf8b4a2263\",\n    \"experience\": 13,\n    \"email\": \"shekhargulati84@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/dev/employers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"dev",
+						"employers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE employers local",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fullname\": \"Joel Maykon\",\n    \"id\": \"36fce6a0-aaad-11eb-80bb-7fcf8b4a2263\",\n    \"experience\": 13,\n    \"email\": \"shekhargulati84@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/dev/employers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"dev",
+						"employers"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
