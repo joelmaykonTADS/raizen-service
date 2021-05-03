@@ -1,4 +1,3 @@
 module.exports = {
-    verbose: true,
-    present: '@shelf/jest-dynamodb'
+    verbose: true
 }
