@@ -7,7 +7,7 @@ const create = (params, callback) => {
 
 const list = (params, callback) => {
     const dynamoDb = config.aws.dynamoDBConnection();
-    return dynamoDb.scan(params, callback);
+    dynamoDb.scan(params, callback);
 }
 
 const update = (params, callback) => {
