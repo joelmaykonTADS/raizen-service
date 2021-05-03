@@ -95,6 +95,23 @@ npm run tdd
 }
 ```
 
+### DELETE
+`https://7hbs0mxh12.execute-api.us-east-1.amazonaws.com/dev/employers?id=2927ea00-absada4-123-a550-asd123123qas` 
+
+**Response**
+
+```
+{
+    "message": "Sucessfully remove employer with office",
+    "employerId": "2927ea00-absada4-123-a550-asd123123qas"
+}
+```
+
+### Importação de arquivo para postman
+
+- Documentação do postman [importando arquivo json](https://learning.postman.com/docs/getting-started/importing-and-exporting-data/#importing-data-into-postman)
+- Nosso arquivo de importação [raizen JSON](https://github.com/joelmaykonTADS/raizen-service/tree/main/postman)
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
