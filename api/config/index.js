@@ -1,0 +1,1 @@
+module.exports.aws = require('./aws-dynamoDB.js');

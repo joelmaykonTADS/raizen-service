@@ -80,4 +80,20 @@ functions:
     events:
       - http: 
           path: employers
-          method: patch  
+          method: patch
+          request:
+            parameters:
+              querystrings:
+                id: true  
+  removeEmployer:
+    handler: api/employer.remove
+    memorySize: 128
+    description: Remove employer
+    events:
+      - http: 
+          path: employers
+          method: delete
+          request:
+            parameters:
+              querystrings:
+                id: true   
