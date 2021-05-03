@@ -56,7 +56,8 @@ npm run tdd
 }
 ```
 ### GET
-[`https://7hbs0mxh12.execute-api.us-east-1.amazonaws.com/dev/employers`](https://7hbs0mxh12.execute-api.us-east-1.amazonaws.com/dev/employers)
+`https://7hbs0mxh12.execute-api.us-east-1.amazonaws.com/dev/employers`
+<a href="https://7hbs0mxh12.execute-api.us-east-1.amazonaws.com/dev/employers" target="_blank">Acessar no navegador</a>
 
 **Response**
 
