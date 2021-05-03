@@ -48,7 +48,12 @@ const validation = ({ fullname, office, age }, callback) => {
     }
 }
 
-const list = (params, callback) => {
+const list = (callback) => {
+    const params = {
+        TableName: process.env.EMPLOYER_TABLE,
+        ProjectionExpression: "id, fullname, office, age"
+    };
+
     const onScan = (err, data) => {
         if (err) {
             callback(err);
@@ -64,15 +69,27 @@ const list = (params, callback) => {
     serviceDB.dynamo.list(params, onScan);
 }
 
-const params = () => {
+const update = ({ fullname, office, age, id }, callback) => {
+
     const params = {
         TableName: process.env.EMPLOYER_TABLE,
-        ProjectionExpression: "id, fullname, office, age"
+        Key: {
+            "id": id
+        },
+        UpdateExpression: "set #fullname = :fullname, #office = :office, #age = :age",
+        ExpressionAttributeNames: {
+            "#fullname": "fullname",
+            "#office": "office",
+            "#age": "age"
+        },
+        ExpressionAttributeValues: {
+            ":fullname": fullname,
+            ":office": office,
+            ":age": age
+        },
+        ReturnValues: 'ALL_NEW'
     };
-    return params;
-}
 
-const update = (params, callback) => {
     const updatedEmployer = (err, data) => {
         const info = data.Attributes;
         if (err) {
@@ -96,39 +113,16 @@ const update = (params, callback) => {
     return serviceDB.dynamo.update(params, updatedEmployer)
 }
 
-const paramsId = ({ fullname, office, age }, id) => {
-    const params = {
-        TableName: process.env.EMPLOYER_TABLE,
-        Key: {
-            "id": id
-        },
-        UpdateExpression: "set #fullname = :fullname, #office = :office, #age = :age",
-        ExpressionAttributeNames: {
-            "#fullname": "fullname",
-            "#office": "office",
-            "#age": "age"
-        },
-        ExpressionAttributeValues: {
-            ":fullname": fullname,
-            ":office": office,
-            ":age": age
-        },
-        ReturnValues: 'ALL_NEW'
-    };
-    return params;
-}
 
-const paramsRemove = (id) => {
+
+const remove = (id, callback) => {
     const params = {
         TableName: process.env.EMPLOYER_TABLE,
         Key: {
-            "id": id,          
+            "id": id,
         }
     };
-    return params;
-}
 
-const remove = (params, callback) => {
     const removeEmployer = (err, data) => {
         if (err) {
             callback(null, {
@@ -142,7 +136,7 @@ const remove = (params, callback) => {
                 statusCode: 200,
                 body: JSON.stringify({
                     message: `Sucessfully remove employer with office`,
-                    employerId: params.id
+                    employerId: id
                 })
             });
         }
@@ -151,4 +145,4 @@ const remove = (params, callback) => {
     return serviceDB.dynamo.remove(params, removeEmployer)
 }
 
-module.exports = { create, data, validation, list, update, paramsId, params, remove, paramsRemove }
+module.exports = { create, data, validation, list, update, remove }

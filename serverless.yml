@@ -81,10 +81,6 @@ functions:
       - http: 
           path: employers
           method: patch
-          request:
-            parameters:
-              querystrings:
-                id: true  
   removeEmployer:
     handler: api/employer.remove
     memorySize: 128
