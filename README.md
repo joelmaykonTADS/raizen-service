@@ -10,7 +10,7 @@ Use o comando abaixo para instalar os pacotes node.
 npm install
 ```
 
-## Usage
+## Como usar
 
 ```
 #  - Necessário ter o serverless framework para rodar localmente
